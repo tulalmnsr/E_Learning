@@ -1,6 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from "jwt-decode";
+const jwt_decode = require('jwt-decode');
+
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
 //registerUser action creator takes data and dispatch action to reducer along with payload

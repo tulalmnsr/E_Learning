@@ -4,7 +4,8 @@ import "./index.scss";
 import store from "./store";
 import { Provider } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
-import jwt_decode from "jwt-decode";
+const jwt_decode = require('jwt-decode');
+
 
 import Login from "./auth/Login";
 import Register from "./auth/Register";
