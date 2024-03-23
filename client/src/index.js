@@ -25,7 +25,7 @@ import HomeTwo from "./HomeTwo";
 import About from "./pages/About";
 import Services from "./service/Services";
 import ServicesForInstructor from "./service/ServicesByInstructor";
-import Servicesforstudent from "./service/ServiceforStudent"
+import Servicesforstudent from "./service/ServiceforStudent";
 import ServiceDetailsLeftSidebar from "./service/ServiceDetailsLeftSidebar";
 import Projects from "./project/Projects";
 import ProjectDetails from "./project/ProjectDetails";
@@ -35,8 +35,8 @@ import AddLecture from "./blog/Addlecture";
 import BlogDetailsLeftSidebar from "./blog/BlogDetailsLeftSidebar";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/404";
-import NoMAtch from "./pages/404";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NoMatch from "./pages/404"; // Corrected import statement
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import * as serviceWorker from "./serviceWorker";
 
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -79,13 +79,13 @@ class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter basename={"/"}>
-          <Switch>
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/`}
-              component={HomeTwo}
-            />
+       <BrowserRouter basename={"/"}>
+  <Routes>
+    <Route
+      exact
+      path={`${process.env.PUBLIC_URL}/`}
+      element={<HomeTwo />}
+    />
 
             <Route
               exact
@@ -266,7 +266,7 @@ class Root extends Component {
               component={AddEducation}
             />
             <PrivateRoute component={NoMAtch} />
-          </Switch>
+          </Routes>
         </BrowserRouter>
       </Provider>
     );

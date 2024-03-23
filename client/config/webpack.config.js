@@ -28,9 +28,7 @@ const typescriptFormatter = require("react-dev-utils/typescriptFormatter");
 
 const postcssNormalize = require("postcss-normalize");
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== "false";
 
@@ -100,9 +98,7 @@ module.exports = function(webpackEnv) {
               },
               stage: 3
             }),
-            // Adds PostCSS Normalize as the reset css with default options,
-            // so that it honors browserslist config in package.json
-            // which in turn let's users customize the target behavior as per their needs.
+        
             postcssNormalize()
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap
@@ -129,26 +125,13 @@ module.exports = function(webpackEnv) {
         ? "source-map"
         : false
       : isEnvDevelopment && "cheap-module-source-map",
-    // These are the "entry points" to our application.
-    // This means they will be the "root" imports that are included in JS bundle.
+
     entry: [
-      // Include an alternative client for WebpackDevServer. A client's job is to
-      // connect to WebpackDevServer by a socket and get notified about changes.
-      // When you save a file, the client will either apply hot updates (in case
-      // of CSS changes), or refresh the page (in case of JS changes). When you
-      // make a syntax error, this client will display a syntax error overlay.
-      // Note: instead of the default WebpackDevServer client, we use a custom one
-      // to bring better experience for Create React App users. You can replace
-      // the line below with these two lines if you prefer the stock client:
-      // require.resolve('webpack-dev-server/client') + '?/',
-      // require.resolve('webpack/hot/dev-server'),
+   
       isEnvDevelopment &&
         require.resolve("react-dev-utils/webpackHotDevClient"),
-      // Finally, this is your app's code:
       paths.appIndexJs
-      // We include the app code last so that if there is a runtime error during
-      // initialization, it doesn't blow up the WebpackDevServer client, and
-      // changing JS code would still trigger a refresh.
+     
     ].filter(Boolean),
     output: {
       // The build folder.
@@ -177,6 +160,13 @@ module.exports = function(webpackEnv) {
               .replace(/\\/g, "/")
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, "/"))
+    },
+    resolve: {
+      modules: [
+        path.resolve(__dirname, 'src'),
+        'node_modules'
+      ],
+      extensions: ['.js', '.jsx']
     },
     optimization: {
       minimize: isEnvProduction,
@@ -621,4 +611,5 @@ module.exports = function(webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false
   };
+  
 };
