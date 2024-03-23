@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux'; // Importing createStore, applyMiddleware, compose from redux
-import { thunk } from 'redux-thunk'; // Importing 'thunk' as a named export from redux-thunk
-import rootReducer from './reducers'; // Importing rootReducer from reducers file
+import { applyMiddleware, compose } from 'redux';
+import { legacy_createStore as createStore } from 'redux';
+import { thunk } from 'redux-thunk'; // Import thunk without default
+
+import rootReducer from './reducers';
 
 // Initial state for store
 const initialState = {};
